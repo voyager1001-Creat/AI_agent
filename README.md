@@ -1,218 +1,218 @@
-# Agent - AI智能助手项目
+# Agent - AI Assistant Project
 
-一个基于现代Web技术栈构建的AI智能助手系统，集成了大语言模型、情感分析和语音合成功能，提供完整的聊天对话体验。
+A modern AI assistant system built with cutting-edge web technologies, integrating large language models, emotion analysis, and speech synthesis for a complete conversational experience.
 
-## 🌟 项目特色
+## 🌟 Key Features
 
-- **🤖 智能对话**: 基于Ollama的本地大语言模型，支持多种模型切换
-- **🎭 情感分析**: 集成Chinese-Emotion-Small模型，智能识别用户情感
-- **🎵 语音合成**: 使用IndexTTS2进行情感化语音合成，支持多种情感表达
-- **💬 对话管理**: 完整的对话历史管理和系统提示词配置
-- **🎨 现代UI**: 基于React + TypeScript + Tailwind CSS的响应式界面
-- **⚡ 实时交互**: WebSocket支持实时消息推送和状态更新
+- **🤖 Intelligent Chat**: Local large language models via Ollama with multi-model support
+- **🎭 Emotion Analysis**: Integrated Chinese-Emotion-Small model for intelligent emotion recognition
+- **🎵 Speech Synthesis**: IndexTTS2-powered emotional speech synthesis with multiple emotion expressions
+- **💬 Conversation Management**: Complete conversation history and system prompt configuration
+- **🎨 Modern UI**: Responsive interface built with React + TypeScript + Tailwind CSS
+- **⚡ Real-time Interaction**: WebSocket support for real-time messaging and status updates
 
-## 🏗️ 技术架构
+## 🏗️ Technical Architecture
 
-### 前端技术栈
-- **React 18** - 现代化用户界面框架
-- **TypeScript** - 类型安全的JavaScript
-- **Tailwind CSS** - 实用优先的CSS框架
-- **Vite** - 快速的构建工具
-- **React Router** - 客户端路由
-- **Zustand** - 轻量级状态管理
+### Frontend Stack
+- **React 18** - Modern UI framework
+- **TypeScript** - Type-safe JavaScript
+- **Tailwind CSS** - Utility-first CSS framework
+- **Vite** - Fast build tool
+- **React Router** - Client-side routing
+- **Zustand** - Lightweight state management
 
-### 后端技术栈
-- **FastAPI** - 高性能Python Web框架
-- **SQLAlchemy** - Python SQL工具包和ORM
-- **SQLite** - 轻量级数据库
-- **Uvicorn** - ASGI服务器
-- **Pydantic** - 数据验证和序列化
+### Backend Stack
+- **FastAPI** - High-performance Python web framework
+- **SQLAlchemy** - Python SQL toolkit and ORM
+- **SQLite** - Lightweight database
+- **Uvicorn** - ASGI server
+- **Pydantic** - Data validation and serialization
 
-### AI/ML组件
-- **Ollama** - 本地大语言模型运行环境
-- **Transformers** - Hugging Face模型库
-- **IndexTTS2** - 情感化语音合成模型
-- **Chinese-Emotion-Small** - 中文情感分析模型
+### AI/ML Components
+- **Ollama** - Local large language model runtime
+- **Transformers** - Hugging Face model library
+- **IndexTTS2** - Emotional speech synthesis model
+- **Chinese-Emotion-Small** - Chinese emotion analysis model
 
-## 📋 系统要求
+## 📋 System Requirements
 
 - **Python**: 3.10+
 - **Node.js**: 16+
 - **npm**: 8+
-- **uv**: 最新版本（用于IndexTTS2）
-- **Git LFS**: 用于下载大模型文件
-- **Conda**: 用于Python环境管理
+- **uv**: Latest version (for IndexTTS2)
+- **Git LFS**: For downloading large model files
+- **Conda**: For Python environment management
 
-## 🚀 部署指南
+## 🚀 Deployment Guide
 
-### 1. 配置IndexTTS2服务
+### 1. Configure IndexTTS2 Service
 
-IndexTTS2是一个突破性的情感化语音合成模型，支持零样本情感表达和时长控制。
+IndexTTS2 is a breakthrough emotional speech synthesis model supporting zero-shot emotion expression and duration control.
 
 ```bash
-# 进入IndexTTS2目录
+# Navigate to IndexTTS2 directory
 cd agent/backend/index-tts
 
-# 拉取大文件（需要Git LFS）
+# Pull large files (requires Git LFS)
 git lfs pull
 
-# 安装依赖（使用uv）
+# Install dependencies (using uv)
 uv sync
 
-# 下载IndexTTS2模型（选择其中一种方式）
+# Download IndexTTS2 model (choose one method)
 
-# 方式1: 使用Hugging Face
+# Method 1: Using Hugging Face
 hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
 
-# 方式2: 使用ModelScope
+# Method 2: Using ModelScope
 modelscope download --model IndexTeam/IndexTTS-2 --local_dir checkpoints
 ```
 
-**注意**: IndexTTS2模型文件较大，请确保有足够的存储空间和网络带宽。
+**Note**: IndexTTS2 model files are large, ensure sufficient storage space and network bandwidth.
 
-### 2. 安装主环境依赖
+### 2. Install Main Environment Dependencies
 
 ```bash
-# 进入项目根目录
+# Navigate to project root
 cd agent
 
-# 创建Python环境
+# Create Python environment
 conda create -n agent python=3.10
 conda activate agent
 
-# 安装依赖
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 3. 下载情感分析模型
+### 3. Download Emotion Analysis Model
 
 ```bash
-# 进入情感模型目录
+# Navigate to emotion model directory
 cd agent/backend/emotion_model
 
-# 下载Chinese-Emotion-Small模型
+# Download Chinese-Emotion-Small model
 python -c "
 from transformers import pipeline
 pipe = pipeline('text-classification', model='Johnson8187/Chinese-Emotion-Small')
 "
 ```
 
-### 4. 启动项目
+### 4. Start the Project
 
-#### 4.1 启动前端服务
+#### 4.1 Start Frontend Service
 
 ```bash
-# 进入前端目录
+# Navigate to frontend directory
 cd agent/frontend
 
-# 安装依赖
+# Install dependencies
 npm install
 
-# 构建项目
+# Build project
 npm run build
 
-# 启动开发服务器
+# Start development server
 npm run dev
 ```
 
-前端服务将在 `http://localhost:5173` 启动
+Frontend service will start at `http://localhost:5173`
 
-#### 4.2 启动后端API服务
+#### 4.2 Start Backend API Service
 
 ```bash
-# 进入后端目录
+# Navigate to backend directory
 cd agent/backend
 
-# 启动FastAPI服务器
+# Start FastAPI server
 python start_server.py
 ```
 
-后端API服务将在 `http://localhost:8001` 启动
+Backend API service will start at `http://localhost:8001`
 
-#### 4.3 启动TTS服务
+#### 4.3 Start TTS Service
 
 ```bash
-# 进入TTS服务目录
+# Navigate to TTS service directory
 cd agent/backend/index-tts
 
-# 启动TTS服务
+# Start TTS service
 uv run start_tts_service.py
 ```
 
-TTS服务将在 `http://localhost:8000` 启动
+TTS service will start at `http://localhost:8000`
 
-## 🎯 使用指南
+## 🎯 Usage Guide
 
-### 基本功能
+### Basic Features
 
-1. **聊天对话**: 在聊天界面输入消息，AI助手会智能回复
-2. **语音播放**: 点击消息旁的播放按钮，AI会使用情感化语音朗读回复
-3. **对话管理**: 查看历史对话，创建新对话，管理对话标题
-4. **系统配置**: 配置Ollama模型、TTS服务和系统提示词
+1. **Chat Conversation**: Input messages in the chat interface for AI assistant responses
+2. **Voice Playback**: Click the play button next to messages for emotional voice reading
+3. **Conversation Management**: View conversation history, create new conversations, manage conversation titles
+4. **System Configuration**: Configure Ollama models, TTS service, and system prompts
 
-### 高级功能
+### Advanced Features
 
-1. **系统提示词管理**: 
-   - 创建自定义系统提示词
-   - 编辑和删除现有提示词
-   - 激活/停用提示词
+1. **System Prompt Management**: 
+   - Create custom system prompts
+   - Edit and delete existing prompts
+   - Activate/deactivate prompts
 
-2. **情感化语音**: 
-   - 自动识别用户情感
-   - 根据情感选择合适的语音风格
-   - 支持多种情感表达
+2. **Emotional Speech**: 
+   - Automatic user emotion recognition
+   - Select appropriate voice styles based on emotions
+   - Support for multiple emotion expressions
 
-3. **模型管理**: 
-   - 切换不同的Ollama模型
-   - 配置模型参数
-   - 测试模型连接
+3. **Model Management**: 
+   - Switch between different Ollama models
+   - Configure model parameters
+   - Test model connections
 
-## 📁 项目结构
+## 📁 Project Structure
 
 ```
 agent/
-├── frontend/                 # 前端React应用
+├── frontend/                 # Frontend React application
 │   ├── src/
-│   │   ├── components/      # React组件
-│   │   ├── pages/           # 页面组件
-│   │   ├── hooks/           # 自定义Hooks
-│   │   ├── services/        # API服务
-│   │   └── types/           # TypeScript类型定义
+│   │   ├── components/      # React components
+│   │   ├── pages/           # Page components
+│   │   ├── hooks/           # Custom hooks
+│   │   ├── services/        # API services
+│   │   └── types/           # TypeScript type definitions
 │   └── package.json
-├── backend/                  # 后端FastAPI应用
-│   ├── api/                 # API路由
-│   ├── core/                # 核心业务逻辑
-│   ├── models/              # 数据模型
-│   ├── database/            # 数据库配置
-│   ├── emotion_model/       # 情感分析模型
-│   ├── index-tts/          # IndexTTS2服务
-│   └── utils/               # 工具函数
-├── config/                  # 配置文件
-└── requirements.txt         # Python依赖
+├── backend/                  # Backend FastAPI application
+│   ├── api/                 # API routes
+│   ├── core/                # Core business logic
+│   ├── models/              # Data models
+│   ├── database/            # Database configuration
+│   ├── emotion_model/       # Emotion analysis model
+│   ├── index-tts/          # IndexTTS2 service
+│   └── utils/               # Utility functions
+├── config/                  # Configuration files
+└── requirements.txt         # Python dependencies
 ```
 
-## 🔧 配置说明
+## 🔧 Configuration
 
-### 环境变量
+### Environment Variables
 
-创建 `.env` 文件配置环境变量：
+Create `.env` file to configure environment variables:
 
 ```env
-# Ollama配置
+# Ollama configuration
 OLLAMA_BASE_URL=http://localhost:11434
 OLLAMA_DEFAULT_MODEL=qwen3:1.7b
 
-# TTS配置
+# TTS configuration
 INDEX_TTS_BASE_URL=http://localhost:8000
 INDEX_TTS_TIMEOUT=60
 
-# 数据库配置
+# Database configuration
 DATABASE_URL=sqlite:///./chat.db
 ```
 
-### 模型配置
+### Model Configuration
 
-在 `config/settings.json` 中配置模型参数：
+Configure model parameters in `config/settings.json`:
 
 ```json
 {
@@ -229,53 +229,58 @@ DATABASE_URL=sqlite:///./chat.db
 }
 ```
 
-## 🐛 故障排除
+## 🐛 Troubleshooting
 
-### 常见问题
+### Common Issues
 
-1. **TTS服务启动失败**
-   - 检查uv是否正确安装
-   - 确认IndexTTS2模型文件已下载
-   - 检查端口8000是否被占用
+1. **TTS Service Startup Failure**
+   - Check if uv is properly installed
+   - Confirm IndexTTS2 model files are downloaded
+   - Check if port 8000 is occupied
 
-2. **Ollama连接失败**
-   - 确认Ollama服务正在运行
-   - 检查模型是否已下载
-   - 验证端口11434是否可访问
+2. **Ollama Connection Failure**
+   - Confirm Ollama service is running
+   - Check if models are downloaded
+   - Verify port 11434 is accessible
 
-3. **前端构建失败**
-   - 检查Node.js版本（需要16+）
-   - 清除node_modules重新安装
-   - 检查网络连接
+3. **Frontend Build Failure**
+   - Check Node.js version (requires 16+)
+   - Clear node_modules and reinstall
+   - Check network connection
 
-### 日志查看
+### Log Viewing
 
-- 后端日志: `backend/logs/`
-- TTS服务日志: 控制台输出
-- 前端日志: 浏览器开发者工具
+- Backend logs: `backend/logs/`
+- TTS service logs: Console output
+- Frontend logs: Browser developer tools
 
-## 🤝 贡献指南
+## 🤝 Contributing
 
-1. Fork 项目
-2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 打开 Pull Request
+1. Fork the project
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📄 许可证
+## 📄 License
 
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
-## 🙏 致谢
+## 🙏 Acknowledgments
 
-- [IndexTTS2](https://github.com/IndexTeam/IndexTTS-2) - 情感化语音合成模型
-- [Ollama](https://ollama.ai/) - 本地大语言模型运行环境
-- [Hugging Face](https://huggingface.co/) - 模型库和工具
-- [FastAPI](https://fastapi.tiangolo.com/) - 现代Python Web框架
-- [React](https://reactjs.org/) - 用户界面库
-
-
+- [IndexTTS2](https://github.com/IndexTeam/IndexTTS-2) - Emotional speech synthesis model
+- [Ollama](https://ollama.ai/) - Local large language model runtime
+- [Hugging Face](https://huggingface.co/) - Model library and tools
+- [FastAPI](https://fastapi.tiangolo.com/) - Modern Python web framework
+- [React](https://reactjs.org/) - User interface library
 
 ---
 
-**注意**: 本项目仅供学习和研究使用，请遵守相关法律法规和模型使用条款。
+**Note**: This project is for educational and research purposes only. Please comply with relevant laws and regulations and model usage terms.
+
+## 📖 Documentation
+
+- [中文文档](README_zh.md) - Chinese documentation
+- [API Documentation](http://localhost:8001/docs) - FastAPI auto-generated docs
+- [Frontend Documentation](frontend/README.md) - Frontend specific documentation
+- [Backend Documentation](backend/README.md) - Backend specific documentation
